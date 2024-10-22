@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="icon" href="../static/images/icon.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculator App</h1>
+        <div class="calculator">
+            <form method="GET">
+                <!-- Number A with step attribute to allow floats -->
+                <input type="number" name="numberA" placeholder="Enter First Number" required
+                       step="any"
+                       value="{{numberA if numberA is not none else ''}}">
+                <!-- Operation selection dropdown -->
+                <select name="operation" required>
+                    <option value="" disabled {% if not operation %}selected{% endif %}>Select Operation</option>
+                    <option value="add" {% if operation == 'add' %}selected{% endif %}>Add (+)</option>
+                    <option value="minus" {% if operation == 'minus' %}selected{% endif %}>Subtract (-)</option>
+                    <option value="multiply" {% if operation == 'multiply' %}selected{% endif %}>Multiply (×)</option>
+                    <option value="divide" {% if operation == 'divide' %}selected{% endif %}>Divide (÷)</option>
+                </select>
+                <!-- Number B with step attribute to allow floats -->
+                <input type="number" name="numberB" placeholder="Enter Second Number" required
+                       step="any"
+                       value="{{numberB if numberB is not none else ''}}">
+                <!-- Submit button -->
+                <button type="submit">Calculate</button>
+            </form>
+            {% if result is not none %}
+                <!-- Result display section -->
+                <div id="result">
+                    <p class="result-text">{{ {'status': status,'result': result} }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
